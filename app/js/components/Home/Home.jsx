@@ -18,7 +18,6 @@ class Home extends Component {
     return (
       <div>
         {hotelIds}
-        <button onClick={this.props.getHotels}>Hotels</button>
       </div>
     );
   }
