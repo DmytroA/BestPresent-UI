@@ -15,7 +15,7 @@ class Hotel extends Component {
 
 Hotel.propTypes = {
   params: React.PropTypes.shape({
-    id: React.PropTypes.string,
+    id: React.PropTypes.number,
   }),
   getHotel: React.PropTypes.func,
   hotel: React.PropTypes.array,
