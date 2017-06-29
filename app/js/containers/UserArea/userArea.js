@@ -55,12 +55,10 @@ class UserArea extends React.Component {
             </Paper>
           </Menu>
         </Drawer>
-        <div>
-          <AppBar
-            title="test"
-            onLeftIconButtonTouchTap={this.onDrawer}
-          />
-        </div>
+        <AppBar
+          title="Best Present"
+          onLeftIconButtonTouchTap={this.onDrawer}
+        />
         {this.renderChildren()}
       </div>
     );

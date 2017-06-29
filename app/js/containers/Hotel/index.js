@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import {
   GET_HOTEL_PENDING,
 } from '../../actions';
-import Hotel from '../../components/Hotel/Hotel';
+import Hotel from './hotel';
 
 const mapStateToProps = state => ({
   hotel: state.hotels.currentHotel,

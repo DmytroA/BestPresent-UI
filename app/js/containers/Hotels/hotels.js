@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Card from '../../containers/Card';
+import Card from '../../components/Card/Card';
+import theme from './theme.scss';
 
-class Home extends Component {
+class Hotels extends Component {
   componentDidMount() {
     this.props.getHotels();
   }
@@ -10,24 +11,24 @@ class Home extends Component {
       this.props.hotels.map(item =>
         <Card
           id={item.Id}
-          hotelName={item.Name}
-          hotelCategory={item.Category}
-          hotelImage={item.ImageData}
-          hotelDescription={item.Description}
+          name={item.Name}
+          category={item.Category}
+          image={item.ImageData}
+          description={item.Description}
         />);
     return (
-      <div>
+      <div className={theme.container}>
         {hotelIds}
       </div>
     );
   }
 }
 
-Home.propTypes = {
+Hotels.propTypes = {
   getHotels: React.PropTypes.func,
   hotels: React.PropTypes.array,
   loading: React.PropTypes.bool,
   error: React.PropTypes.string,
 };
 
-export default Home;
+export default Hotels;
