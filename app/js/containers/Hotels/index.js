@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import {
   GET_HOTELS_PENDING,
 } from '../../actions';
-import Home from './hotels';
+import Hotels from './hotels';
 
 const mapStateToProps = state => ({
   hotels: state.hotels.data,
@@ -14,4 +14,4 @@ const mapDispatchToProps = dispatch => ({
   getHotels: () => dispatch({ type: GET_HOTELS_PENDING }),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Hotels);

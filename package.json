@@ -2,7 +2,6 @@
   "version": "1.0.0",
   "name": "BestPresent",
   "title": "Best Present",
- 
   "private": true,
   "devDependencies": {
     "axios": "^0.13.1",
@@ -43,28 +42,34 @@
     "file-loader": "^0.8",
     "image-webpack-loader": "^1.8",
     "json-loader": "^0.5",
+    "lodash": "^4.17.4",
     "postcss-loader": "^0.9",
     "postcss-scss": "^0.1.9",
     "precss": "^1.4.0",
     "react-addons-test-utils": "^15.1",
     "react-hot-loader": "~3.0.0-beta.6",
+    "react-slick": "^0.14.11",
     "redux-mock-store": "1.0",
+    "redux-saga": "^0.14.3",
+    "reselect": "^2.5.4",
+    "slick-carousel": "^1.6.0",
     "static-proxy": "^0.1.12",
     "style-loader": "^0.13",
-    "stylelint": "^7.0.3",
+    "stylelint": "^7.12.0 ",
     "stylelint-config-standard": "^11.0.0",
+    "transform-loader": "^0.2.4",
     "url-loader": "^0.5",
     "webpack": "^1.9.10",
     "webpack-dev-server": "^1.9.0",
-    "webpack-node-externals": "^1.2",
-    "lodash": "^4.17.4",
-    "redux-saga": "^0.14.3",
-    "reselect": "^2.5.4",
-    "transform-loader": "^0.2.4"
+    "webpack-node-externals": "^1.2"
   },
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.config.js --hot --progress --colors --port 8888",
     "build": "webpack --config webpack.prod.config.js"
+  },
+  "-vs-binding": {
+    "AfterBuild": [
+      "build"
+    ]
   }
-, "-vs-binding":{"AfterBuild":["build"]}
 }

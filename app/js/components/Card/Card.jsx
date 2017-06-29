@@ -13,7 +13,6 @@ import Toggle from 'material-ui/Toggle';
 import ava from '../../../media/ava.jpg';
 
 class HotelCard extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -38,7 +37,7 @@ class HotelCard extends React.Component {
   };
 
   goToPage = () => {
-    browserHistory.push(`/hotel/${this.props.id}`);
+    browserHistory.push(`/${this.props.page}/${this.props.id}`);
   }
 
   render() {
@@ -67,7 +66,11 @@ class HotelCard extends React.Component {
         </CardText>
         <CardMedia
           expandable
-          overlay={<CardTitle title={this.props.name} subtitle={this.props.category} />}
+          overlay={
+            <CardTitle
+              title={this.props.name}
+              subtitle={this.props.category ? this.props.category : 'test'}
+            />}
         >
           <img src={`data:image/jpeg;base64,${this.props.image}`} alt="" />
         </CardMedia>
@@ -89,6 +92,7 @@ HotelCard.propTypes = {
   id: React.PropTypes.string,
   name: React.PropTypes.string,
   category: React.PropTypes.string,
+  page: React.PropTypes.string,
   image: React.PropTypes.string,
   description: React.PropTypes.string,
 };

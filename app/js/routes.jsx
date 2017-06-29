@@ -6,6 +6,8 @@ import Hotels from './containers/Hotels';
 import UserArea from './containers/UserArea';
 import NotFound from './containers/NotFound';
 import Hotel from './containers/Hotel';
+import Countries from './containers/Countries';
+import Country from './containers/Country';
 
 const routes = (
   <Route path="/" component={Root}>
@@ -13,6 +15,8 @@ const routes = (
       <Route component={UserArea}>
         <Route path="hotels" component={Hotels} />
         <Route path="hotel/:id" component={Hotel} />
+        <Route path="countries" component={Countries} />
+        <Route path="country/:id" component={Country} />
         <IndexRoute component={Hotels} />
       </Route>
     </Route>

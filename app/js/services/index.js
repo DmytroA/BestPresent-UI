@@ -12,6 +12,17 @@ export const api = {
   getHotel(id) {
     return Axios.get(`/hotel/${id}`);
   },
+  getCountries() {
+    return Axios.get('/country', {
+      params: {
+        page: 1,
+        pageSize: 10,
+      },
+    });
+  },
+  getCountry(id) {
+    return Axios.get(`/country/${id}`);
+  },
 };
 
 export default api;
