@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import {
   GET_HOTELS_PENDING,
 } from '../../actions';
-import Home from '../../components/Home/Home';
+import Home from './hotels';
 
 const mapStateToProps = state => ({
   hotels: state.hotels.data,

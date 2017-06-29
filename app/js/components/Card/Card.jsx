@@ -46,6 +46,9 @@ class HotelCard extends React.Component {
       <Card
         expanded={this.state.expanded}
         onExpandChange={this.handleExpandChange}
+        style={{
+          width: '600px',
+        }}
       >
         <CardHeader
           title="URL Avatar"
@@ -64,13 +67,13 @@ class HotelCard extends React.Component {
         </CardText>
         <CardMedia
           expandable
-          overlay={<CardTitle title={this.props.hotelName} subtitle={this.props.hotelCategory} />}
+          overlay={<CardTitle title={this.props.name} subtitle={this.props.category} />}
         >
-          <img src={`data:image/jpeg;base64,${this.props.hotelImage}`} alt="" />
+          <img src={`data:image/jpeg;base64,${this.props.image}`} alt="" />
         </CardMedia>
         <CardTitle title="Card title" subtitle="Card subtitle" expandable />
         <CardText expandable>
-          <span dangerouslySetInnerHTML={{ __html: this.props.hotelDescription }} />
+          <span dangerouslySetInnerHTML={{ __html: this.props.description }} />
         </CardText>
         <CardActions>
           <FlatButton label="Open" onTouchTap={this.goToPage} />
@@ -84,10 +87,10 @@ class HotelCard extends React.Component {
 
 HotelCard.propTypes = {
   id: React.PropTypes.string,
-  hotelName: React.PropTypes.string,
-  hotelCategory: React.PropTypes.string,
-  hotelImage: React.PropTypes.string,
-  hotelDescription: React.PropTypes.string,
+  name: React.PropTypes.string,
+  category: React.PropTypes.string,
+  image: React.PropTypes.string,
+  description: React.PropTypes.string,
 };
 
 export default HotelCard;
