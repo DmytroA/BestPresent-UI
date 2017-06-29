@@ -2,35 +2,34 @@ import React, { Component } from 'react';
 import Card from '../../components/Card/Card';
 import theme from './theme.scss';
 
-class Hotels extends Component {
+class Countries extends Component {
   componentDidMount() {
-    this.props.getHotels();
+    this.props.getCountries();
   }
   render() {
-    const hotelIds = this.props.hotels &&
-      this.props.hotels.map(item =>
+    const countries = this.props.countries &&
+      this.props.countries.map(item =>
         <Card
           id={item.Id}
           key={item.Id}
-          name={item.Name}
           page="country"
-          category={item.Category}
+          name={item.Name}
           image={item.ImageData}
           description={item.Description}
         />);
     return (
       <div className={theme.container}>
-        {hotelIds}
+        {countries}
       </div>
     );
   }
 }
 
-Hotels.propTypes = {
-  getHotels: React.PropTypes.func,
-  hotels: React.PropTypes.array,
+Countries.propTypes = {
+  getCountries: React.PropTypes.func,
+  countries: React.PropTypes.array,
   loading: React.PropTypes.bool,
   error: React.PropTypes.string,
 };
 
-export default Hotels;
+export default Countries;
