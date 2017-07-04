@@ -46,7 +46,8 @@ class HotelCard extends React.Component {
         expanded={this.state.expanded}
         onExpandChange={this.handleExpandChange}
         style={{
-          width: '600px',
+          maxWidth: '600px',
+          minWidth: '100px',
         }}
       >
         <CardHeader
