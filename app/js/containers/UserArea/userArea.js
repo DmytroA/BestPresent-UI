@@ -7,6 +7,7 @@ import {
   Menu,
   MenuItem,
 } from 'material-ui';
+import Carousel from '../../components/Carousel/Carousel';
 
 class UserArea extends React.Component {
   constructor(props) {

@@ -8,6 +8,7 @@ import NotFound from './containers/NotFound';
 import Hotel from './containers/Hotel';
 import Countries from './containers/Countries';
 import Country from './containers/Country';
+import AddCountry from './containers/Admin';
 
 const routes = (
   <Route path="/" component={Root}>
@@ -17,6 +18,7 @@ const routes = (
         <Route path="hotel/:id" component={Hotel} />
         <Route path="countries" component={Countries} />
         <Route path="country/:id" component={Country} />
+        <Route path="admin" component={AddCountry} />
         <IndexRoute component={Hotels} />
       </Route>
     </Route>

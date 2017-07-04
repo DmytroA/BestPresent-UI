@@ -23,6 +23,9 @@ export const api = {
   getCountry(id) {
     return Axios.get(`/country/${id}`);
   },
+  addCountry(data) {
+    return Axios.post('country', data);
+  },
 };
 
 export default api;
