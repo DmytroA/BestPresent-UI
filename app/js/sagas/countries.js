@@ -10,12 +10,13 @@ import {
   ADD_COUNTRY_PENDING,
   ADD_COUNTRY_FAIL,
   ADD_COUNTRY_SUCCESS,
+  CHANGE_COUNTRIES_PAGE,
 } from '../actions';
 import { api } from '../services';
 
-export function* getCountries() {
+export function* getCountries(action) {
   try {
-    const countries = yield call(api.getCountries);
+    const countries = yield call(api.getCountries, action.payload);
     yield put({ type: GET_COUNTRIES_SUCCESS, payload: countries.data });
   } catch (error) {
     yield put({ type: GET_COUNTRIES_FAIL, error });
@@ -40,10 +41,15 @@ export function* addCountry(action) {
   }
 }
 
+function* countryPageChanged(action) {
+  yield put({ type: GET_COUNTRIES_PENDING, payload: { page: action.payload.page } })
+}
+
 export default function () {
   return [
     takeEvery(GET_COUNTRIES_PENDING, getCountries),
     takeEvery(GET_COUNTRY_PENDING, getCountry),
     takeEvery(ADD_COUNTRY_PENDING, addCountry),
+    takeEvery(CHANGE_COUNTRIES_PAGE, countryPageChanged)
   ];
 }

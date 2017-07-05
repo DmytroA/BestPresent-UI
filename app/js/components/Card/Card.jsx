@@ -9,7 +9,6 @@ import {
 } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import { browserHistory } from 'react-router';
-import Toggle from 'material-ui/Toggle';
 import ava from '../../../media/ava.jpg';
 
 class HotelCard extends React.Component {
@@ -22,10 +21,6 @@ class HotelCard extends React.Component {
 
   handleExpandChange = (expanded) => {
     this.setState({ expanded });
-  };
-
-  handleToggle = (event, toggle) => {
-    this.setState({ expanded: toggle });
   };
 
   handleExpand = () => {
@@ -57,14 +52,6 @@ class HotelCard extends React.Component {
           actAsExpander
           showExpandableButton
         />
-        <CardText>
-          <Toggle
-            toggled={this.state.expanded}
-            onToggle={this.handleToggle}
-            labelPosition="right"
-            label="This toggle controls the expanded state of the component."
-          />
-        </CardText>
         <CardMedia
           expandable
           overlay={

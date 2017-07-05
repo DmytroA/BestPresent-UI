@@ -16,7 +16,6 @@ class AddCountryForm extends React.Component {
   }
 
   onFieldChange = (e) => {
-    console.log('test');
     this.setState({
       [e.target.name]: e.target.value,
       [`${e.target.name}Error`]: null,
@@ -24,26 +23,35 @@ class AddCountryForm extends React.Component {
   }
 
   handleChange = (e) => {
-    this.setState({
-      filePath: e.target.value,
-    })
+    const file = e.target.files[0];
+    console.log(file);
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result;
+      const result = dataUrl.split("base64,")[1];
+      this.setState({
+        filePath: result,
+      })
+    }
+    if (file) {
+      const name = reader.readAsDataURL(file);
+    }
     e.preventDefault();
   }
 
   submit = (e) => {
-    console.log('2');
     e.preventDefault();
     this.props.onSubmitChanges({
       Name: this.state.name,
       Description: this.state.description,
-      ImageData: this.state.filePath,
+      ImagePath: this.state.filePath,
     })
   }
 
 
   render() {
     return (
-      <div>
+      <div className={theme.container}>
         <form onChange={this.onFieldChange}>
           <Input
             name="name"
@@ -71,6 +79,8 @@ class AddCountryForm extends React.Component {
           >
             <input
               type="file"
+              id="image"
+              name="image"
               value={this.state.filePath}
               onChange={this.handleChange}
               style={{
@@ -90,7 +100,6 @@ class AddCountryForm extends React.Component {
           label="SAVE"
           onTouchTap={this.submit}
         />
-
       </div>
     );
   }

@@ -1,22 +1,23 @@
 import Axios from './axiosConfig';
+import constants from '../constants/defaultPagination';
 
 export const api = {
-  getHotels() {
+  getHotels(params) {
     return Axios.get('/hotel', {
       params: {
-        page: 2,
-        pageSize: 10,
+        ...constants.defaultPagination,
+        ...params,
       },
     });
   },
   getHotel(id) {
     return Axios.get(`/hotel/${id}`);
   },
-  getCountries() {
+  getCountries(params) {
     return Axios.get('/country', {
       params: {
-        page: 1,
-        pageSize: 10,
+        ...constants.defaultPagination,
+        ...params,
       },
     });
   },
