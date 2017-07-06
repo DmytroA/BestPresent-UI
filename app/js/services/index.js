@@ -27,6 +27,9 @@ export const api = {
   addCountry(data) {
     return Axios.post('country', data);
   },
+  editCountry(id, data) {
+    return Axios.put(`country/${id}`, data);
+  },
 };
 
 export default api;

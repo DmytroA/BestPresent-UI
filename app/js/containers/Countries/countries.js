@@ -17,15 +17,16 @@ class Countries extends Component {
           name={item.Name}
           image={item.ImageData}
           description={item.Description}
+          onSelect={this.props.onSelectCountry}
         />);
     return (
       <div className={theme.container}>
         {countries}
         {this.props.pagination &&
-        <Pagination
-          onChange={this.props.onChangePage}
-          {...this.props.pagination}
-        />
+          <Pagination
+            onChange={this.props.onChangePage}
+            {...this.props.pagination}
+          />
         }
       </div>
     );
@@ -44,6 +45,7 @@ Countries.propTypes = {
     totalNumberOfPages: React.PropTypes.number,
   }),
   onChangePage: React.PropTypes.func.isRequired,
+  onSelectCountry: React.PropTypes.func,
 };
 
 export default Countries;

@@ -2,6 +2,7 @@ import React from 'react';
 import {
   RaisedButton,
 } from 'material-ui';
+import isEmpty from 'lodash/isEmpty';
 import Input from '../../components/input';
 import theme from './theme.scss';
 
@@ -9,10 +10,26 @@ class AddCountryForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filePath: this.props.filePath,
+      id: this.props.id,
+      filePath: this.props.imageData,
       name: this.props.name,
       description: this.props.description,
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.id !== nextProps.id) {
+      this.setState({ id: nextProps.id });
+    }
+    if (this.props.imageData !== nextProps.imageData) {
+      this.setState({ filePath: nextProps.imageData });
+    }
+    if (this.props.name !== nextProps.name) {
+      this.setState({ name: nextProps.name });
+    }
+    if (this.props.description !== nextProps.description) {
+      this.setState({ description: nextProps.description });
+    }
   }
 
   onFieldChange = (e) => {
@@ -24,28 +41,35 @@ class AddCountryForm extends React.Component {
 
   handleChange = (e) => {
     const file = e.target.files[0];
-    console.log(file);
     const reader = new FileReader();
     reader.onload = () => {
       const dataUrl = reader.result;
-      const result = dataUrl.split("base64,")[1];
+      const result = dataUrl.split('base64,')[1];
       this.setState({
         filePath: result,
-      })
-    }
+      });
+    };
     if (file) {
-      const name = reader.readAsDataURL(file);
+      reader.readAsDataURL(file);
     }
     e.preventDefault();
   }
 
   submit = (e) => {
     e.preventDefault();
-    this.props.onSubmitChanges({
+    this.props.onAddCountry({
       Name: this.state.name,
       Description: this.state.description,
       ImagePath: this.state.filePath,
-    })
+    });
+  }
+  edit = (e) => {
+    e.preventDefault();
+    this.props.onEditCountry(this.props.id, {
+      Name: this.state.name,
+      Description: this.state.description,
+      ImagePath: this.state.filePath,
+    });
   }
 
 
@@ -53,6 +77,14 @@ class AddCountryForm extends React.Component {
     return (
       <div className={theme.container}>
         <form onChange={this.onFieldChange}>
+          {this.state.id &&
+            <Input
+              name="id"
+              value={this.state.id.toString()}
+              label="Id"
+            />
+          }
+          <br />
           <Input
             name="name"
             value={this.state.name}
@@ -66,12 +98,10 @@ class AddCountryForm extends React.Component {
             label="description"
             editable
           /><br />
-          <Input
-            name="filePath"
-            value={this.state.filePath}
-            label="filePath"
-            editable
-          /><br />
+          {!isEmpty(this.state.filePath) &&
+            <img src={`data:image/jpeg;base64,${this.state.filePath}`} alt="" />
+          }
+          <br />
           <RaisedButton
             label="Choose an Image"
             labelPosition="before"
@@ -79,9 +109,7 @@ class AddCountryForm extends React.Component {
           >
             <input
               type="file"
-              id="image"
               name="image"
-              value={this.state.filePath}
               onChange={this.handleChange}
               style={{
                 cursor: 'pointer',
@@ -96,21 +124,26 @@ class AddCountryForm extends React.Component {
             />
           </RaisedButton>
         </form>
-        <RaisedButton
-          label="SAVE"
-          onTouchTap={this.submit}
-        />
+        {isEmpty(this.props.id) &&
+          <RaisedButton
+            label="Edit"
+            onTouchTap={this.edit}
+          />
+        }
       </div>
     );
   }
 }
 
 AddCountryForm.propTypes = {
+  id: React.PropTypes.number,
   filePath: React.PropTypes.string,
   name: React.PropTypes.string,
   description: React.PropTypes.string,
+  imageData: React.PropTypes.string,
   editable: React.PropTypes.bool,
-  onSubmitChanges: React.PropTypes.func.isRequired,
+  onAddCountry: React.PropTypes.func,
+  onEditCountry: React.PropTypes.func,
 };
 
 export default AddCountryForm;

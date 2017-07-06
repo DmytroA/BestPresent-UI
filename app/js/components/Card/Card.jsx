@@ -35,6 +35,11 @@ class HotelCard extends React.Component {
     browserHistory.push(`/${this.props.page}/${this.props.id}`);
   }
 
+  handleEdit = () => {
+    this.props.onSelect(this.props.id);
+    browserHistory.push('/admin');
+  }
+
   render() {
     return (
       <Card
@@ -70,6 +75,7 @@ class HotelCard extends React.Component {
           <FlatButton label="Open" onTouchTap={this.goToPage} />
           <FlatButton label="Expand" onTouchTap={this.handleExpand} />
           <FlatButton label="Reduce" onTouchTap={this.handleReduce} />
+          <FlatButton label="Edit" onTouchTap={this.handleEdit} />
         </CardActions>
       </Card>
     );
@@ -77,12 +83,16 @@ class HotelCard extends React.Component {
 }
 
 HotelCard.propTypes = {
-  id: React.PropTypes.string,
+  id: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number,
+  ]),
   name: React.PropTypes.string,
   category: React.PropTypes.string,
   page: React.PropTypes.string,
   image: React.PropTypes.string,
   description: React.PropTypes.string,
+  onSelect: React.PropTypes.func,
 };
 
 export default HotelCard;
