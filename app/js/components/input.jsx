@@ -50,7 +50,10 @@ const Input = ({
 );
 
 Input.propTypes = {
-  name: React.PropTypes.string,
+  name: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number,
+  ]),
   defaultValue: React.PropTypes.string,
   label: React.PropTypes.string,
   error: React.PropTypes.string,

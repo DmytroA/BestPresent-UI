@@ -3,10 +3,7 @@ import Coverflow from 'react-coverflow';
 import { StyleRoot } from 'radium';
 import ava from '../../../media/ava.jpg';
 
-class Carousel extends React.Component {
-  fn = () => {
-    console.log('test');
-  }
+class Carousel extends React.PureComponent {
   render() {
     return (
       <StyleRoot>
@@ -30,7 +27,7 @@ class Carousel extends React.Component {
             },
           }}
         >
-          <img src={ava} alt="title or description" data-action={this.fn} />
+          <img src={ava} alt="title or description" />
           <img src={ava} alt="title or description" data-action="http://andyyou.github.io/react-coverflow/" />
           <img src={ava} alt="title or descriptio" data-action="http://andyyou.github.io/react-coverflow/" />
         </Coverflow>

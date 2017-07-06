@@ -99,7 +99,6 @@ module.exports = {
     ]
   },
   postcss: [
-    stylelint,
     autoprefixer({
       browsers: [
         'ie >= 11',

@@ -1,5 +1,6 @@
 import { takeEvery } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
+import { browserHistory } from 'react-router';
 import {
   GET_COUNTRIES_PENDING,
   GET_COUNTRY_PENDING,
@@ -10,7 +11,11 @@ import {
   ADD_COUNTRY_PENDING,
   ADD_COUNTRY_FAIL,
   ADD_COUNTRY_SUCCESS,
+  EDIT_COUNTRY_PENDING,
+  EDIT_COUNTRY_SUCCESS,
+  EDIT_COUNTRY_FAIL,
   CHANGE_COUNTRIES_PAGE,
+  SELECT_COUNTRY,
 } from '../actions';
 import { api } from '../services';
 
@@ -41,8 +46,23 @@ export function* addCountry(action) {
   }
 }
 
+function* editCountry(action) {
+  try {
+    yield call(api.editCountry, action.id, action.payload);
+    yield put({ type: EDIT_COUNTRY_SUCCESS });
+    yield put({ type: GET_COUNTRIES_PENDING });
+    yield call(browserHistory.push, '/countries');
+  } catch (error) {
+    yield put({ type: EDIT_COUNTRY_FAIL, error });
+  }
+}
+
+function* selectCountry(action) {
+  yield put({ type: GET_COUNTRY_PENDING, payload: action.payload });
+}
+
 function* countryPageChanged(action) {
-  yield put({ type: GET_COUNTRIES_PENDING, payload: { page: action.payload.page } })
+  yield put({ type: GET_COUNTRIES_PENDING, payload: { page: action.payload.page } });
 }
 
 export default function () {
@@ -50,6 +70,8 @@ export default function () {
     takeEvery(GET_COUNTRIES_PENDING, getCountries),
     takeEvery(GET_COUNTRY_PENDING, getCountry),
     takeEvery(ADD_COUNTRY_PENDING, addCountry),
-    takeEvery(CHANGE_COUNTRIES_PAGE, countryPageChanged)
+    takeEvery(EDIT_COUNTRY_PENDING, editCountry),
+    takeEvery(CHANGE_COUNTRIES_PAGE, countryPageChanged),
+    takeEvery(SELECT_COUNTRY, selectCountry),
   ];
 }
